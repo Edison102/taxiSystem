@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  
+  <mapper namespace="com.sfu.dao.UserDao">
+  	<resultMap type="User" id="UserMapper">
+  		<id column="uid" property="uid"/>
+  		<result column="name" property="name"/>
+  		<result column="password" property="password"/>
+  		<result column="phone" property="phone"/>
+  		<result column="isAdmin" property="isAdmin"/>
+  		<collection property="orders" ofType="Order" select="selectAllOrderById" column="uid" />
+  	</resultMap>
+    <select id="selectAllOrderById"  resultType="com.sfu.beans.Orders">
+		select id,uid,origin,start_time,end_location,payment,is_pay
+		from orders
+		where uid=#{uid}
+	</select>
+  
+  
+  	<select id="queryUserByNameAndPwd" parameterType="User" resultMap="UserMapper">
+  		select uid,name,password,phone,isAdmin from user where name=#{name} and password=#{password}
+  	</select>
+  
+  	<select id="queryUserById" resultMap="UserMapper">
+  		select uid,name,password,phone,isAdmin from user where uid=#{uid}
+  	</select>
+  	
+  	<select id="queryUserByName" parameterType="User"  resultType="User">
+  		select uid,name,password,phone,isAdmin from user where name=#{name}
+  	</select>
+  	
+  	<select id="queryAllUser" resultMap="UserMapper">
+  		select uid,name,password,phone,isAdmin from user 
+  	</select>
+  
+  	<update id="modifyUseryId" parameterType="User">
+  		update user set name=#{name},password=#{password},phone=#{phone},isAdmin=#{isAdmin} where uid=#{uid}
+  	</update>
+  	
+  	<update id="addUser" parameterType="User">
+  		insert into user(name,password,phone,isAdmin) values(#{name},#{password},#{phone},#{isAdmin})
+  	</update>
+  	
+  </mapper>

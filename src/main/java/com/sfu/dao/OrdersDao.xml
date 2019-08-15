@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  
+  <mapper namespace="com.sfu.dao.OrdersDao">
+  	<resultMap type="Orders" id="OrdersMapper">
+  		<id column="id" property="id"/>
+  		<result column="uid" property="uid"/>
+  		<result column="origin" property="origin"/>
+  		<result column="start_time" property="start_time"/>
+  		<result column="end_location" property="end_location"/>
+  		<result column="payment" property="payment"/>
+  		<result column="is_pay" property="is_pay"/>
+  		<association property="dispatchInfo" column="dis_id" javaType="DispatchInfo" select="selectDispatchInfoById"/>
+  	</resultMap>
+    <select id="selectDispatchInfoById"  resultType="com.sfu.beans.DispatchInfo">
+		select * from dispatch_info
+		where id=#{dis_id}
+	</select>
+  
+  	<select id="quaryAllOrdersByUid" resultType="Orders">
+  		select * from orders where uid=#{uid} order by is_pay,id desc
+  	</select>
+  	
+  	<select id="quaryOrdersByDis" resultType="Orders">
+  		select * from orders where dis_id=#{did}
+  	</select>
+  	
+  	
+  	<select id="quaryOrdersById" resultMap="OrdersMapper">
+  		select * from orders where id=#{id}
+  	</select>
+  	
+  	<update id="toPay" >
+  		update orders set is_pay=1 where id=#{id}
+  	</update>
+
+  	<insert id="addOrders" parameterType="Orders">
+  		insert into orders(uid,origin,start_time,end_location,payment,is_pay,dis_id) 
+  		values(#{uid},#{origin},#{start_time},#{end_location},#{payment},#{is_pay},#{dispatchInfo.id})
+  	</insert>
+  	
+  	<update id="modifyPayment">
+  		update orders set payment=#{payment} where id=#{id}
+  	</update>
+  </mapper>

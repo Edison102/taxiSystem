@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  
+  <mapper namespace="com.sfu.dao.EvaluationDao">
+  	
+  	<update id="modifyScoreByUid">
+  		update evaluation set num_peo=num_peo+1,score=score*0.7+#{score}*0.3 
+  		where uid=#{uid}
+  	</update>
+  
+  	
+  </mapper>

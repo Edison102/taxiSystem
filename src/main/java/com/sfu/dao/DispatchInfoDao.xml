@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  
+  <mapper namespace="com.sfu.dao.DispatchInfoDao">
+  
+  	<select id="quaryAllDispatchInfo" resultType="DispatchInfo">
+  		select * from dispatch_info
+  	</select>
+  	
+  	<select id="quaryDispatchInfoByDis" resultType="DispatchInfo">
+  		select * from dispatch_info where end_location like concat('%',#{dis},'%')
+  	</select>
+  	
+  	
+  	<select id="quaryDispatchInfoByUid" resultType="DispatchInfo">
+  		select * from dispatch_info where uid=#{uid}
+  	</select>
+  	
+  	
+  	<select id="quaryDispatchInfoById" resultType="DispatchInfo">
+  		select * from dispatch_info where id=#{id}
+  	</select>
+  	
+  	
+  	<update id="modifyDispatchInfoById" >
+  		update dispatch_info set num_peo=num_peo+1 where id=#{id}
+  	</update>
+  	
+  	<update id="finishDispatchInfoById" >
+  		update dispatch_info set is_over=1 where id=#{id}
+  	</update>
+  	
+  	<insert id="addDispatchInfo" parameterType="DispatchInfo">
+  		insert into dispatch_info(uid,origin,start_time,end_location,num_peo,max_peo,total_price,is_over) 
+  		values(#{uid},#{origin},#{start_time},#{end_location},#{num_peo},#{max_peo},#{total_price},#{is_over})
+  	</insert>
+  </mapper>
