@@ -5,9 +5,15 @@ import java.util.List;
 import com.sfu.beans.User;
 import com.sfu.dao.UserDao;
 import com.sfu.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Service("userService")
 public class UserServiceImpl implements IUserService {
-	
+
+	@Autowired
+	@Qualifier("userDao")
 	private UserDao dao;
 	
 	

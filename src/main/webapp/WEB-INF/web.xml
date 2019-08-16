@@ -27,7 +27,7 @@
   <!--  全局参数-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
+    <param-value>classpath:spring/spring-*.xml</param-value>
   </context-param>
   <!-- 加载spring 的配置文件 -->
   <!-- 监听spring的配置文件-->
@@ -40,7 +40,7 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:springmvc.xml</param-value>
+      <param-value>classpath:spring/spring-*.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

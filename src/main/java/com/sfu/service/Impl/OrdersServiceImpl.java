@@ -7,10 +7,19 @@ import com.sfu.beans.Orders;
 import com.sfu.dao.EvaluationDao;
 import com.sfu.dao.OrdersDao;
 import com.sfu.service.IOrdersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Service("ordersService")
 public class OrdersServiceImpl implements IOrdersService {
-	
+
+	@Autowired
+	@Qualifier("ordersDao")
 	private OrdersDao dao;
+
+	@Autowired
+	@Qualifier("evaluationDao")
 	private EvaluationDao evaluationDao;
 
 	public void setDao(OrdersDao dao) {

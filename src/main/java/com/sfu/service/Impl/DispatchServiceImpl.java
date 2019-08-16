@@ -6,10 +6,19 @@ import com.sfu.beans.DispatchInfo;
 import com.sfu.dao.DispatchInfoDao;
 import com.sfu.dao.OrdersDao;
 import com.sfu.service.IDispatchInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Service("dispatchInfoService")
 public class DispatchServiceImpl implements IDispatchInfoService{
 
+	@Autowired
+	@Qualifier("dispatchInfoDao")
 	private DispatchInfoDao dao;
+
+	@Autowired
+	@Qualifier("ordersDao")
 	private OrdersDao ordersDao;
 	
 	public void setDao(DispatchInfoDao dao) {
