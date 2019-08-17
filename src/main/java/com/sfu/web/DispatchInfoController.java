@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +38,7 @@ public class DispatchInfoController {
 	
 	@RequestMapping("toDispatchInfoController")
 	public String toDispatchInfoController(){
-		return "dispatch";
+		return "dispatch/dispatch";
 	}
 	
 	
@@ -47,7 +46,7 @@ public class DispatchInfoController {
 	public String searchController(String dispatch,Model model){
 		List<DispatchInfo> dispatchInfos=dispatchService.selectDispatchInfoByDis(dispatch);
 		model.addAttribute("dispatchInfos", dispatchInfos);
-		return "dispatch";
+		return "dispatch/dispatch";
 	}
 	
 	
@@ -55,14 +54,14 @@ public class DispatchInfoController {
 	public String searchAllController(Model model){
 		List<DispatchInfo> dispatchInfos=dispatchService.selectAllDispatchInfo();
 		model.addAttribute("dispatchInfos", dispatchInfos);
-		return "dispatch";
+		return "dispatch/dispatch";
 	}
 	
 	
 	@RequestMapping("noSearchController")
 	public String noSearchController(Model model){
 		model.addAttribute("dispatchInfos", null);
-		return "dispatch";
+		return "dispatch/dispatch";
 	}
 	
 	@RequestMapping("dispatchInfoMoreController")
@@ -71,7 +70,7 @@ public class DispatchInfoController {
 		Owner owner=ownerService.selectOwnerById(dispatchInfo.getUid());
 		model.addAttribute("dispatchInfo", dispatchInfo);
 		model.addAttribute("owner", owner);
-		return "dispatchMore";
+		return "dispatch/dispatchMore";
 	}
 	
 	@RequestMapping("finishController")
@@ -81,11 +80,8 @@ public class DispatchInfoController {
 		if(dispatchInfo.getNum_peo()>0){
 			payment=dispatchInfo.getTotal_price()/dispatchInfo.getNum_peo();
 		}
-		List<Orders> orders=ordersService.selectOrdersByDis(id);
-		for(Orders order :orders){
-			dispatchService.finishDispatchInfo(id, order.getId(), payment);
-		}
-		return "owner";
+		dispatchService.finishAllDispatchInfo(id,payment);
+		return "owner/owner";
 	}
 	
 	@RequestMapping("aboardController")
@@ -95,21 +91,8 @@ public class DispatchInfoController {
 		if(dispatchInfo.getNum_peo()>=dispatchInfo.getMax_peo()||dispatchInfo.getIs_over()==1){
 			return "aboardError";
 		}
-		synchronized (this) {
-			if(dispatchInfo.getNum_peo()>=dispatchInfo.getMax_peo()||dispatchInfo.getIs_over()==1){
-				return "aboardError";
-			}
-			Orders order=new Orders();
-			order.setUid(user.getUid());
-			order.setOrigin(dispatchInfo.getOrigin());
-			order.setStart_time(dispatchInfo.getStart_time());
-			order.setEnd_location(dispatchInfo.getEnd_location());
-			order.setPayment(0);
-			order.setIs_pay(0);
-			order.setDispatchInfo(dispatchInfo);
-			dispatchService.updateDispatchInfo(id);
-			ordersService.insertOrders(order);
-		}
+		boolean success=dispatchService.aboard(id,user.getUid());
+		if(!success) return "aboardError";
 		return "redirect:/orders/searchAllController";
 	}
 }

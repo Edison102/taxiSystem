@@ -3,12 +3,14 @@ package com.sfu.service.Impl;
 import java.util.List;
 
 import com.sfu.beans.DispatchInfo;
+import com.sfu.beans.Orders;
 import com.sfu.dao.DispatchInfoDao;
 import com.sfu.dao.OrdersDao;
 import com.sfu.service.IDispatchInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("dispatchInfoService")
 public class DispatchServiceImpl implements IDispatchInfoService{
@@ -59,16 +61,46 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	public void finishDispatchInfo(Integer did, Integer oid, double payment) {
-		dao.finishDispatchInfoById(did);
+	public void finishDispatchInfo(Integer oid, double payment) {
+		//dao.finishDispatchInfoById(did);
 		ordersDao.modifyPayment(oid, payment);
 	}
 
+	@Override
+	@Transactional
+	public void finishAllDispatchInfo(Integer id,double payment) {
+		dao.finishDispatchInfoById(id);
+		List<Orders> orders=ordersDao.quaryOrdersByDis(id);
+		for(Orders order :orders){
+			finishDispatchInfo(order.getId(), payment);
+		}
+	}
 
 
 	@Override
 	public void insertDispatchInfo(DispatchInfo dispatchInfo) {
 		dao.addDispatchInfo(dispatchInfo);
 	}
+
+	@Override
+	@Transactional
+	public boolean aboard(Integer id, Integer uid) {
+		DispatchInfo dispatchInfo=dao.quaryDispatchInfoById(id);
+		if(dispatchInfo.getNum_peo()>=dispatchInfo.getMax_peo()||dispatchInfo.getIs_over()==1){
+			return false;
+		}
+		Orders order=new Orders();
+		order.setUid(uid);
+		order.setOrigin(dispatchInfo.getOrigin());
+		order.setStart_time(dispatchInfo.getStart_time());
+		order.setEnd_location(dispatchInfo.getEnd_location());
+		order.setPayment(0);
+		order.setIs_pay(0);
+		order.setDispatchInfo(dispatchInfo);
+		dao.modifyDispatchInfoById(id);
+		ordersDao.addOrders(order);
+		return true;
+	}
+
 
 }

@@ -34,7 +34,7 @@ public class OrdersController {
 		User user=(User)session.getAttribute("user");
 		List<Orders> list=ordersService.selectAllOrdersByUid(user.getUid());
 		model.addAttribute("orders", list);
-		return "orders";
+		return "orders/orders";
 	}
 	
 	
@@ -44,7 +44,7 @@ public class OrdersController {
 		Owner owner=ownerService.selectOwnerById(orders.getDispatchInfo().getUid());
 		model.addAttribute("orders", orders);
 		model.addAttribute("owner", owner);
-		return "ordersMore";
+		return "orders/ordersMore";
 	}
 	
 	@RequestMapping("topayController")

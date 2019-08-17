@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sfu.beans.User;
 import com.sfu.service.IUserService;
@@ -23,7 +22,7 @@ public class UserController {
 	
 	@RequestMapping("/toLoginController")
 	public String toLoginController(){
-		return "login";
+		return "user/login";
 	}
 	
 	@RequestMapping("/loginController")
@@ -31,31 +30,31 @@ public class UserController {
 		User u=userService.selectUserByNameAndPwd(user);
 		if(u==null){
 			model.addAttribute("loginError", "用户名或密码错误");
-			return "login";
+			return "user/login";
 		}
 		session.setAttribute("user", u);
-		return "main";
+		return "main/main";
 	}
 	
 	@RequestMapping("/toRegisterController")
 	public String toRegisterController(){
-		return "register";
+		return "user/register";
 	}
 	
 	@RequestMapping("registerController")
 	public String registerController(User user,@Param("password2") String password2,Model model){
 		if(!user.getPassword().equals(password2)){
 			model.addAttribute("passwordError", "密码重复输入错误");
-			return "register";
+			return "user/register";
 		}
 		User u=userService.selectUserByName(user);
 		if(u!=null){
 			model.addAttribute("userNameError", "用户名已存在");
-			return "register";
+			return "user/register";
 		}
 		user.setIsAdmin(0);
 		userService.insertUser(user);
-		return "registerSuccess";
+		return "user/registerSuccess";
 	}
 	
 	
@@ -63,21 +62,21 @@ public class UserController {
 	//---------------------------访问主体的四个页面------------------------------
 			@RequestMapping(value="/topController")
 			public String topController(){
-				return "top";
+				return "main/top";
 			}
 			
 			@RequestMapping(value="/mainleftController")
 			public String adminleftController(){
-				return "mainleft";
+				return "main/mainleft";
 			}
 			
 			@RequestMapping(value="/welcomeController")
 			public String welcomeController(){
-				return "welcome";
+				return "main/welcome";
 			}
 			
 			@RequestMapping(value="/footController")
 			public String footController(){
-				return "foot";
+				return "main/foot";
 			}
 }

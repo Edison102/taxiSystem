@@ -10,6 +10,8 @@ public interface IDispatchInfoService {
 	List<DispatchInfo> selectDispatchInfoByUid(Integer uid);
 	DispatchInfo selectDispatchInfoById(Integer id);
 	void updateDispatchInfo(Integer id);
-	void finishDispatchInfo(Integer did, Integer oid, double payment);
+	void finishDispatchInfo(Integer oid, double payment);
+	void finishAllDispatchInfo(Integer id,double payment);
 	void insertDispatchInfo(DispatchInfo dispatchInfo);
+	boolean aboard(Integer id,Integer uid);
 }

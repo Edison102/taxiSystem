@@ -35,12 +35,12 @@ public class OwnerController {
 		User user=(User) session.getAttribute("user");
 		Owner owner=ownerService.selectOwnerById(user.getUid());
 		session.setAttribute("owner", owner);
-		return "owner";
+		return "owner/owner";
 	}
 	
 	@RequestMapping("toApplyOwnerController")
 	public String toApplyOwnerController(){
-		return "applyOwner";
+		return "owner/applyOwner";
 	}
 	
 	
@@ -49,18 +49,18 @@ public class OwnerController {
 		User user=(User) session.getAttribute("user");
 		List<DispatchInfo> list=dispatchInfoService.selectDispatchInfoByUid(user.getUid());
 		model.addAttribute("dispatchInfos", list);
-		return "owner";
+		return "owner/owner";
 	}
 	
 	@RequestMapping("noSearchDispatchInfoController")
 	public String noSearchDispatchInfoController(Model model){
 		model.addAttribute("dispatchInfos", null);
-		return "owner";
+		return "owner/owner";
 	}
 	
 	@RequestMapping("toDepartController")
 	public String toDepartController(){
-		return "depart";
+		return "owner/depart";
 	}
 	
 	@RequestMapping("departController")
@@ -70,7 +70,7 @@ public class OwnerController {
 		dispatchInfo.setNum_peo(0);
 		dispatchInfo.setIs_over(0);
 		dispatchInfoService.insertDispatchInfo(dispatchInfo);
-		return "owner";
+		return "owner/owner";
 	}
 	
 }
