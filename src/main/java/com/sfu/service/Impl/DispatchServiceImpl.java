@@ -10,6 +10,7 @@ import com.sfu.service.IDispatchInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("dispatchInfoService")
@@ -67,7 +68,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	public void finishAllDispatchInfo(Integer id,double payment) {
 		dao.finishDispatchInfoById(id);
 		List<Orders> orders=ordersDao.quaryOrdersByDis(id);
@@ -83,7 +84,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public boolean aboard(Integer id, Integer uid) {
 		DispatchInfo dispatchInfo=dao.quaryDispatchInfoById(id);
 		if(dispatchInfo.getNum_peo()>=dispatchInfo.getMax_peo()||dispatchInfo.getIs_over()==1){

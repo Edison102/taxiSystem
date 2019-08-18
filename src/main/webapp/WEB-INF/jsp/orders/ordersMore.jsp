@@ -6,10 +6,14 @@
    
     
     <title>My JSP 'dispatchMore.jsp' starting page</title>
+      <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   </head>
   
   <body>
+  <div class="panel panel-primary col-md-6 col-md-offset-3">
    <h3>订单支付</h3>
    ---------------------------------------------------------<br>
  <c:choose>
@@ -38,7 +42,8 @@
   	<option>1</option>
   </select>
   <br>
-	<input type="submit" value="确认提交">
+       <br>
+	<input type="submit" value="确认提交" class="btn btn-success"/>
 </form>
 	</c:otherwise>
 </c:choose>
@@ -46,7 +51,9 @@
   
 </c:otherwise>
 </c:choose>
+  </div>
 <br>
+  <div class="panel panel-primary col-md-6 col-md-offset-3">
    <h3>订单详细信息</h3>
    --------------------------------------------------------<br>
    车主信息：
@@ -66,8 +73,10 @@
  已有人数：${orders.dispatchInfo.num_peo }<br>
  最大人数：${orders.dispatchInfo.max_peo }<br>
  总共价钱：${orders.dispatchInfo.total_price}<br>
-<br><br>
+<br>
 
-<a href="javascript:history.go(-1)" >返回</a>
+  <br>
+<a href="javascript:history.go(-1)" class="btn btn-primary">返回</a>
+  </div>
   </body>
 </html>

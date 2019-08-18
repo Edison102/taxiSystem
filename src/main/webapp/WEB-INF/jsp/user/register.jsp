@@ -19,18 +19,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   </head>
   
   <body>
+  <div class="panel panel-primary col-md-6 col-md-offset-3">
+	  <div class="panel-heading">
+		  <h3 class="panel-title">注册用户</h3>
+	  </div>
+
     <form action="user/registerController" method="post">
-    	用户名：<input type="text" name="name" id="name"/>${userNameError }<br>
-    	密    码：<input type="password" name="password"/> <br>
-    	确认密码：<input type="password" name="password2">${passwordError }<br>
-    	手机号：<input type="text" name="phone"><br>
-    	<input type="submit" value="确认注册">
+    	用户名：<input type="text" name="name" id="name" class="form-control"/>${userNameError }<br>
+    	密    码：<input type="password" name="password" class="form-control"/> <br>
+    	确认密码：<input type="password" name="password2" class="form-control"/>${passwordError }<br>
+    	手机号：<input type="text" name="phone" class="form-control"/><br>
+    	<input type="submit" value="确认注册" class="btn btn-success"/>
     </form>
     
-    <a href="${pageContext.request.contextPath }/user/toLoginController">返回</a>
+    <a href="${pageContext.request.contextPath }/user/toLoginController" class="btn btn-primary">返回</a>
+
+  </div>
   </body>
 </html>

@@ -7,10 +7,17 @@
     
     <title>My JSP 'orders.jsp' starting page</title>
 
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <table align="left">
+  <div class="panel panel-body">
+      <div class="panel-heading">
+          <h3 class="panel-title">订单信息</h3>
+    <table align="left"  class="table table-striped">
                     <tr >
                         <th>订单编号</th>
                         <th>发车地点</th>
@@ -53,5 +60,7 @@
                     </c:otherwise>
                     </c:choose>
                    </table>
+      </div>
+  </div>
   </body>
 </html>

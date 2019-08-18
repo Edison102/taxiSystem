@@ -5,10 +5,14 @@
   <head>
     
     <title>My JSP 'owner.jsp' starting page</title>
-    
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   
   <body>
+  <div class="panel panel-body">
+	  <div class="panel-heading">
     <c:choose>
     	<c:when test="${empty owner  or (owner.is_pass ne 1)}">
 	    
@@ -26,7 +30,7 @@
 	    	
     		<c:if test="${empty owner  or (owner.is_audit eq 1)}">
     		<form action="${pageContext.request.contextPath }/owner/toApplyOwnerController" method="post">
-    			<input type="submit" value="申请车主"/>
+    			<input type="submit" value="申请车主" class="btn btn-success" />
     		</form>
     		</c:if>
     	</c:when>
@@ -34,15 +38,13 @@
     	<c:otherwise>
     		<h4>尊敬的车主，欢迎您</h4>
     		<form action="${pageContext.request.contextPath }/owner/searchDispatchInfoController" method="post">
-    			<input type="submit" value="查看发车"/>
-    		</form>
-    		<form action="${pageContext.request.contextPath }/owner/noSearchDispatchInfoController" method="post">
-    			<input type="submit" value="取消查看"/>
+    			<input type="submit" value="查看发车" class="btn btn-info" />
+				<input type="submit" value="取消查看" class="btn btn-inverse" name="cancel"/>
     		</form>
     		<form action="${pageContext.request.contextPath }/owner/toDepartController" method="post">
-    			<input type="submit" value="我要发车"/>
+    			<input type="submit" value="我要发车" class="btn btn-success"/>
     		</form>
-    		<table align="left">
+    		<table align="left" class="table table-striped">
                     <tr >
                         <th>发车编号</th>
                         <th>发车地点</th>
@@ -92,6 +94,7 @@
     		
     	</c:otherwise>
     </c:choose>
-    
+	  </div>
+  </div>
   </body>
 </html>

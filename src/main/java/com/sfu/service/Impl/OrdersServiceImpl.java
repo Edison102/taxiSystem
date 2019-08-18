@@ -10,6 +10,7 @@ import com.sfu.service.IOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("ordersService")
@@ -50,7 +51,7 @@ public class OrdersServiceImpl implements IOrdersService {
 		此方法用于修改用户的支付状态，同时修改对车主的评分
 		两个方法需要同时完成，因此使用事务
 	 */
-	@Transactional
+	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public void toPay(Integer oid, Integer uid, double score) {
 		dao.toPay(oid);
 		evaluationDao.modifyScoreByUid(uid, score);

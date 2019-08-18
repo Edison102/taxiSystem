@@ -18,14 +18,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+      <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <form action="${pageContext.request.contextPath}/user/loginController" method="post">
-    	用户名：<input name="name" type="text" />${loginError }<br>
-    	密    码：<input name="password" type="password"><br>
-    	<input value="提交" type="submit">
-    </form>
-    <a href="${pageContext.request.contextPath}/user/toRegisterController">注册</a>
+  <div class="panel panel-primary col-md-6 col-md-offset-3">
+      <div class="panel-heading">
+          <h3 class="panel-title">系统登录</h3>
+      </div>
+      <form action="${pageContext.request.contextPath}/user/loginController" method="post">
+          <p style="color: red">${loginError }</p>
+          用户名<input class="form-control" type="text" name="name" /><br>
+          密码：<input class="form-control" type="password" name="password"/><br>
+          <button type="submit" class="btn btn-success">提交</button>
+      </form>
+      <br>
+      <a href="${pageContext.request.contextPath}/user/toRegisterController" class="btn btn-info">注册</a>
+  </div>
   </body>
 </html>

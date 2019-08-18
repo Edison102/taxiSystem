@@ -42,4 +42,11 @@
     <!--全局异常捕捉
     <bean class="com.yingjun.ssm.exception.GlobalExceptionResolver" />-->
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.sfu.interceptors.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

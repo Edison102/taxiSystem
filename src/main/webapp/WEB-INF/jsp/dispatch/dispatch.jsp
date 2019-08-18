@@ -15,27 +15,36 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+      <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   </head>
   
   <body>
+     <div class="panel panel-body">
+      <div class="panel-heading">
      <h3>发车信息界面</h3>
      <form action="${pageContext.request.contextPath }/dispatchInfo/searchController" method="post">
-     	目的地：  <input type="text" name="dispatch"/> <input type="submit" value="确定"/>
+     	目的地：  <input type="text" name="dispatch"  /> <input type="submit" class="btn btn-success" value="确定"/>
      </form>
-     <br><br>
+     <br>
      <form action="${pageContext.request.contextPath }/dispatchInfo/searchAllController" method="post">
-     	<<input type="submit" value="查看所有发车信息" />
+     	<input type="submit" class="btn btn-info" value="查看所有发车信息" />
+         <input type="submit"  class="btn btn-inverse" value="取消查看" name="cancel"/>
      </form>
-     <form action="${pageContext.request.contextPath }/dispatchInfo/noSearchController" method="post">
-     	<<input type="submit" value="取消查看" />
-     </form>
+   <%--  <form action="${pageContext.request.contextPath }/dispatchInfo/noSearchController" method="post">
+     	<input type="submit"  class="btn btn-inverse" value="取消查看" />
+     </form>--%>
+          <br>
+
+             <h3 class="panel-title" style="color:black">查询结果</h3>
      
      
     
-                <h3 style="text-align:center;color:black">查询结果</h3>
+                <%--<h3 style="text-align:center;color:black">查询结果</h3>--%>
                
-                <table align="left">
+                <table align="left" class="table table-striped">
                     <tr >
                         <th>发车编号</th>
                         <th>发车地点</th>
@@ -82,5 +91,7 @@
                     </c:otherwise>
                     </c:choose>
                    </table>
+      </div>
+     </div>
   </body>
 </html>

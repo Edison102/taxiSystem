@@ -7,9 +7,13 @@
     
     <title>My JSP 'dispatchMore.jsp' starting page</title>
 
+      <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   
   <body>
+  <div class="panel panel-primary col-md-6 col-md-offset-3">
    <h3>发车详细信息</h3>
    --------------------------------------------------------<br>
    车主信息：
@@ -40,9 +44,12 @@
 <br><br>
 <c:if test="${dispatchInfo.num_peo <  dispatchInfo.max_peo  and dispatchInfo.is_over ne 1 }">
 <form action="${pageContext.request.contextPath}/dispatchInfo/aboardController?id=${dispatchInfo.id}" method="post">
-	<input type="submit" value="确认上车">${aboardError }
+	<input type="submit" value="确认上车" class="btn btn-success">${aboardError }
 </form>
 </c:if>
-<a href="javascript:history.go(-1)" >返回</a>
+
+  <br>
+<a href="javascript:history.go(-1)" class="btn btn-primary">返回</a>
+  </div>
   </body>
 </html>

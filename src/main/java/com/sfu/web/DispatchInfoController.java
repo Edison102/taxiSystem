@@ -51,7 +51,8 @@ public class DispatchInfoController {
 	
 	
 	@RequestMapping("searchAllController")
-	public String searchAllController(Model model){
+	public String searchAllController(Model model,String cancel){
+		if(cancel!=null) return "dispatch/dispatch";
 		List<DispatchInfo> dispatchInfos=dispatchService.selectAllDispatchInfo();
 		model.addAttribute("dispatchInfos", dispatchInfos);
 		return "dispatch/dispatch";

@@ -45,18 +45,19 @@ public class OwnerController {
 	
 	
 	@RequestMapping("searchDispatchInfoController")
-	public String searchDispatchInfoController(HttpSession session,Model model){
+	public String searchDispatchInfoController(HttpSession session,Model model,String cancel){
+		if(cancel!=null) return "owner/owner";
 		User user=(User) session.getAttribute("user");
 		List<DispatchInfo> list=dispatchInfoService.selectDispatchInfoByUid(user.getUid());
 		model.addAttribute("dispatchInfos", list);
 		return "owner/owner";
 	}
 	
-	@RequestMapping("noSearchDispatchInfoController")
+	/*@RequestMapping("noSearchDispatchInfoController")
 	public String noSearchDispatchInfoController(Model model){
 		model.addAttribute("dispatchInfos", null);
 		return "owner/owner";
-	}
+	}*/
 	
 	@RequestMapping("toDepartController")
 	public String toDepartController(){
