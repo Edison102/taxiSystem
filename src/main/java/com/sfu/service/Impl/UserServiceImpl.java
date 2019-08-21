@@ -5,6 +5,8 @@ import java.util.List;
 import com.sfu.beans.User;
 import com.sfu.dao.UserDao;
 import com.sfu.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,8 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	@Qualifier("userDao")
 	private UserDao dao;
-	
-	
+
+	private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	public void setDao(UserDao dao) {
 		this.dao = dao;
@@ -24,6 +26,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User selectUserByNameAndPwd(User user) {
+		log.info("查找数据开始");
 		return dao.queryUserByNameAndPwd(user);
 	}
 
