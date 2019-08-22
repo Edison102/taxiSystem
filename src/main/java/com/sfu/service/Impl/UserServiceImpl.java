@@ -18,7 +18,7 @@ public class UserServiceImpl implements IUserService {
 	@Qualifier("userDao")
 	private UserDao dao;
 
-	private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+	//private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	public void setDao(UserDao dao) {
 		this.dao = dao;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User selectUserByNameAndPwd(User user) {
-		log.info("查找数据开始");
+		//log.info("查找数据开始");
 		return dao.queryUserByNameAndPwd(user);
 	}
 
