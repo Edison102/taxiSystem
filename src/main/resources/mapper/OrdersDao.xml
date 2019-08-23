@@ -25,7 +25,14 @@
   	<select id="quaryOrdersByDis" resultType="Orders">
   		select * from orders where dis_id=#{did}
   	</select>
-  	
+
+	<!--分页使用-->
+	<select id="quaryNumbersByUid" resultType="java.lang.Integer">
+		select count(*) from orders where uid=#{uid}
+	</select>
+	<select id="quaryOrdersByPage" resultType="Orders">
+  		select * from orders where uid=#{uid} order by is_pay,id desc limit #{start},#{count}
+  	</select>
   	
   	<select id="quaryOrdersById" resultMap="OrdersMapper">
   		select * from orders where id=#{id}

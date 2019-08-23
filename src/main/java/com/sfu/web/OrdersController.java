@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.sfu.util.Fields;
+import com.sfu.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,17 @@ public class OrdersController {
 		User user=(User)session.getAttribute("user");
 		List<Orders> list=ordersService.selectAllOrdersByUid(user.getUid());
 		model.addAttribute("orders", list);
+		return "orders/orders";
+	}
+
+	@RequestMapping("searchByPageController")
+	private String searchByPageController(HttpSession session,Model model,Integer page){
+		User user=(User)session.getAttribute("user");
+		page=page==null?1:page;
+		int total=ordersService.selectNumbersBuUid(user.getUid());
+		List<Orders> dataList=ordersService.selectOrdersByPage(user.getUid(),(page-1)* Fields.pageSize,Fields.pageSize);
+		PageUtil<Orders> Page=new PageUtil<Orders>(dataList,page,Fields.pageSize,total);
+		model.addAttribute("p", Page);
 		return "orders/orders";
 	}
 	

@@ -69,4 +69,14 @@ public class OrdersServiceImpl implements IOrdersService {
 		return dao.quaryOrdersByDis(did);
 	}
 
+	@Override
+	public int selectNumbersBuUid(Integer uid) {
+		return dao.quaryNumbersByUid(uid);
+	}
+
+	@Override
+	public List<Orders> selectOrdersByPage(Integer uid, int start, int count) {
+		return dao.quaryOrdersByPage(uid,start,count);
+	}
+
 }

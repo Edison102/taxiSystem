@@ -26,8 +26,8 @@
                 <div >
                     <div >菜单选项</div>
                     <ul >
-                        <li ><a href="${pageContext.request.contextPath }/dispatchInfo/toDispatchInfoController" target="main" >查看打车信息</a></li>
-                        <li ><a href="${pageContext.request.contextPath }/orders/searchAllController" target="main">查看订单</a></li>
+                        <li ><a href="${pageContext.request.contextPath }/dispatchInfo/searchByPageController" target="main" >查看打车信息</a></li>
+                        <li ><a href="${pageContext.request.contextPath }/orders/searchByPageController" target="main">查看订单</a></li>
                         <li ><a href="${pageContext.request.contextPath }/owner/toOwnerController" target="main">车主相关</a></li>
                         <li ><a href="${pageContext.request.contextPath }/goodsCart/searchCartController" target="main">个人信息</a></li>
                     </ul>

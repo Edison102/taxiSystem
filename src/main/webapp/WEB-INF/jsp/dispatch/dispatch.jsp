@@ -29,10 +29,12 @@
      	目的地：  <input type="text" name="dispatch"  /> <input type="submit" class="btn btn-success" value="确定"/>
      </form>
      <br>
+     <%--
+     作废
      <form action="${pageContext.request.contextPath }/dispatchInfo/searchAllController" method="post">
      	<input type="submit" class="btn btn-info" value="查看所有发车信息" />
          <input type="submit"  class="btn btn-inverse" value="取消查看" name="cancel"/>
-     </form>
+     </form>--%>
    <%--  <form action="${pageContext.request.contextPath }/dispatchInfo/noSearchController" method="post">
      	<input type="submit"  class="btn btn-inverse" value="取消查看" />
      </form>--%>
@@ -59,14 +61,14 @@
                     </tr>
                     
                     <c:choose>
-                     <c:when test="${empty dispatchInfos}">
+                     <c:when test="${empty p.dataList}">
                        <tr>
 	                        <td colspan="9" align="center">暂无数据！</td>
 	                        
                         </tr>
                     </c:when>
                     <c:otherwise>
-                     <c:forEach items="${dispatchInfos}" var="dis">
+                     <c:forEach items="${p.dataList}" var="dis">
                        <tr>
 	                        <td>${dis.id }</td>
 	                        <td>${dis.origin }</td>
@@ -91,6 +93,15 @@
                     </c:otherwise>
                     </c:choose>
                    </table>
+          <a href="${pageContext.request.contextPath}/dispatchInfo/searchByPageController?page=1">首页</a>&nbsp;
+          <c:if test="${p.pageNo ne 1}">
+              <a href="${pageContext.request.contextPath }/dispatchInfo/searchByPageController?page=${p.pageNo-1}">上一页</a>
+          </c:if>&nbsp;
+          当前页：${p.pageNo} |  ${p.pages} &nbsp;
+          <c:if test="${p.pageNo < p.pages}">
+              <a href="${pageContext.request.contextPath }/dispatchInfo/searchByPageController?page=${p.pageNo+1}">下一页</a>
+          </c:if>&nbsp;
+          <a href="${pageContext.request.contextPath }/dispatchInfo/searchByPageController?page=${p.pages}">尾页</a>
       </div>
      </div>
   </body>

@@ -30,14 +30,14 @@
                     </tr>
                     
                     <c:choose>
-                     <c:when test="${empty orders}">
+                     <c:when test="${empty p.dataList}">
                        <tr>
 	                        <td colspan="7" align="center">暂无数据！</td>
 	                        
                         </tr>
                     </c:when>
                     <c:otherwise>
-                     <c:forEach items="${orders}" var="order">
+                     <c:forEach items="${p.dataList}" var="order">
                        <tr>
 	                        <td>${order.id }</td>
 	                        <td>${order.origin }</td>
@@ -60,6 +60,18 @@
                     </c:otherwise>
                     </c:choose>
                    </table>
+
+          <a href="${pageContext.request.contextPath }/orders/searchByPageController?page=1">首页</a>&nbsp;
+          <c:if test="${p.pageNo ne 1}">
+                  <a href="${pageContext.request.contextPath }/orders/searchByPageController?page=${p.pageNo-1}">上一页</a>
+              </c:if>&nbsp;
+              当前页：${p.pageNo} |  ${p.pages} &nbsp;
+              <c:if test="${p.pageNo < p.pages}">
+                  <a href="${pageContext.request.contextPath }/orders/searchByPageController?page=${p.pageNo+1}">下一页</a>
+              </c:if>&nbsp;
+          <a href="${pageContext.request.contextPath }/orders/searchByPageController?page=${p.pages}">尾页</a>
+
+
       </div>
   </div>
   </body>

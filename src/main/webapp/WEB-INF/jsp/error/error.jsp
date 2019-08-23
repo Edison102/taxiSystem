@@ -11,6 +11,13 @@
     <title>Title</title>
 </head>
 <body>
+<h3>错误页面</h3>
+
+<h5>错误信息</h5>
+<p>${exMsg}</p>
+
+<h5>错误类型</h5>
+<p>${exType}</p>
 
 </body>
 </html>
