@@ -22,7 +22,7 @@ public class PageUtil<T> {
         this.dataList = dataList;
         this.pageNo = pageNo;
         this.pageSize = pageSize;
-        this.total = total;
+        this.total = total==0?1:total;
         if(pageSize==0) pages=1;
         else pages=total%pageSize==0?total/pageSize:total/pageSize+1;
     }

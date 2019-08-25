@@ -15,10 +15,10 @@
                 <div >
                     <div >拼车系统管理员</div>
                     <ul >
-                        <li ><a href="${pageContext.request.contextPath }/goods/searchgoodsController" target="main">所有商品</a></li>
-                        <li ><a href="${pageContext.request.contextPath }/goods/toInStoreController" target="main">商品入库</a></li>
-                        <li ><a href="${pageContext.request.contextPath }/goods/toOutStoreController" target="main">商品出库</a></li>
-						<li ><a href="${pageContext.request.contextPath }/goods/toAddGoodsController" target="main">新增商品</a></li>
+                        <li ><a href="${pageContext.request.contextPath }/admin/searchPendingByPageController" target="main">待审车主</a></li>
+                        <li ><a href="${pageContext.request.contextPath }/admin/searchOwnerByPageController" target="main">车主信息</a></li>
+                        <%--<li ><a href="${pageContext.request.contextPath }/goods/toOutStoreController" target="main">商品出库</a></li>
+						<li ><a href="${pageContext.request.contextPath }/goods/toAddGoodsController" target="main">新增商品</a></li>--%>
                     </ul>
                 </div>
                 </c:if>

@@ -75,7 +75,7 @@ public class DispatchInfoController {
 	private String searchByPageController(Model model,Integer page){
 		page=page==null?1:page;
 		int total=dispatchService.selectAllNumbers();
-		List<DispatchInfo> dataList=dispatchService.selectDispatchInfoByPage((page-1)* Fields.pageSize,Fields.pageSize);
+		List<DispatchInfo> dataList=dispatchService.selectDispatchInfoByPage(Fields.getStart(page),Fields.pageSize);
 		PageUtil<DispatchInfo> Page=new PageUtil<DispatchInfo>(dataList,page,Fields.pageSize,total);
 		model.addAttribute("p", Page);
 		return "dispatch/dispatch";

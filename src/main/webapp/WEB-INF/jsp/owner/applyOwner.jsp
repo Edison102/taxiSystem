@@ -26,7 +26,7 @@
 		  <h3 class="panel-title">申请车主</h3>
 	  </div>
   	<form action="${pageContext.request.contextPath}/owner/applyOwnerController" method="post">
-    	身份证号：<input type="text" name="origin" id="id_num" class="form-control"/><br>
+    	身份证号：<input type="text" name="id_num" id="id_num" class="form-control"/><br>
     	车牌号：<input type="text" name="lic_num" class="form-control"/><br>
     	车型：<input type="text" name="model" class="form-control"/><br>
     	<input type="submit" value="确认申请" class="btn btn-success"/>

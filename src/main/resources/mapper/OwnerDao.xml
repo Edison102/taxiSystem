@@ -26,7 +26,37 @@
   	<select id="quaryOwnerById" resultMap="OwnerMapper">
   		select * from owner where uid=#{uid}
   	</select>
-  	
+
+	<update id="modifyOwner" parameterType="Owner">
+  		update owner set id_num=#{id_num},lic_num=#{lic_num},model=#{model},is_audit=#{is_audit},is_pass=#{is_pass}
+  		where uid=#{uid}
+  	</update>
+
+	<insert id="addOwner" parameterType="Owner">
+		insert into owner values(#{uid},#{id_num},#{lic_num},#{model},#{is_audit},#{is_pass})
+	</insert>
+
+
+	<select id="quaryPendingNumbers" resultType="java.lang.Integer">
+		select count(*) from owner where is_audit=0
+	</select>
+
+	<select id="quaryPendingOwnerByPage" resultType="Owner">
+		select * from owner where is_audit=0 limit #{start},#{count}
+	</select>
+
+	<update id="modifyIsPassByUid">
+		update owner set is_audit=1,is_pass=#{is_pass} where uid=#{uid}
+	</update>
+
+
+	<select id="quaryOwnerNumbers" resultType="java.lang.Integer">
+		select count(*) from owner where is_pass=1
+	</select>
+
+	<select id="quaryOwnerByPage" resultMap="OwnerMapper">
+		select * from owner where is_pass=1 limit #{start},#{count}
+	</select>
   <!-- 	<select id="queryUserByName" parameterType="User"  resultType="User">
   		select uid,name,password,phone,isAdmin from user where name=#{name}
   	</select>

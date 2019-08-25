@@ -62,6 +62,16 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
+	public int selectNumbersByUid(Integer uid) {
+		return dao.quaryNumbersByUid(uid);
+	}
+
+	@Override
+	public List<DispatchInfo> selectDispatchInfoByPage(Integer uid, int start, int count) {
+		return dao.quaryDispatchInfoByPageAndUid(uid,start,count);
+	}
+
+	@Override
 	public List<DispatchInfo> selectDispatchInfoByUid(Integer uid) {
 		return dao.quaryDispatchInfoByUid(uid);
 	}

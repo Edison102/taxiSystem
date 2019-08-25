@@ -31,6 +31,14 @@
   		select * from dispatch_info order by start_time desc limit #{start},#{count}
   	</select>
 
+	<!--分页查询相关-->
+	<select id="quaryNumbersByUid" resultType="java.lang.Integer">
+  		select count(*) from dispatch_info where uid=#{uid}
+  	</select>
+	<select id="quaryDispatchInfoByPageAndUid" resultType="DispatchInfo">
+  		select * from dispatch_info where uid=#{uid} order by start_time desc limit #{start},#{count}
+  	</select>
+
   	
   	
   	<update id="modifyDispatchInfoById" >

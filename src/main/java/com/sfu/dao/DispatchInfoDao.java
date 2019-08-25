@@ -13,7 +13,11 @@ public interface DispatchInfoDao {
 	//分页使用
 	int quaryAllNumbers();
 	List<DispatchInfo> quaryDispatchInfoByPage(@Param("start")int start, @Param("count")int count);
-	
+
+	//分页使用
+	int quaryNumbersByUid(Integer uid);
+	List<DispatchInfo> quaryDispatchInfoByPageAndUid(@Param("uid")Integer uid, @Param("start")int start, @Param("count")int count);
+
 	DispatchInfo quaryDispatchInfoById(Integer id);
 	
 	void modifyDispatchInfoById(Integer id);

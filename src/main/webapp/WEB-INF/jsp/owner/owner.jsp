@@ -37,13 +37,14 @@
     	
     	<c:otherwise>
     		<h4>尊敬的车主，欢迎您</h4>
-    		<form action="${pageContext.request.contextPath }/owner/searchDispatchInfoController" method="post">
+    		<%--<form action="${pageContext.request.contextPath }/owner/searchDispatchInfoController" method="post">
     			<input type="submit" value="查看发车" class="btn btn-info" />
 				<input type="submit" value="取消查看" class="btn btn-inverse" name="cancel"/>
-    		</form>
+    		</form>--%>
     		<form action="${pageContext.request.contextPath }/owner/toDepartController" method="post">
     			<input type="submit" value="我要发车" class="btn btn-success"/>
     		</form>
+			<h3 class="panel-title">已发车信息</h3>
     		<table align="left" class="table table-striped">
                     <tr >
                         <th>发车编号</th>
@@ -59,14 +60,14 @@
                     </tr>
                     
                     <c:choose>
-                     <c:when test="${empty dispatchInfos}">
+                     <c:when test="${empty p.dataList}">
                        <tr>
 	                        <td colspan="9" align="center">暂无数据！</td>
 	                        
                         </tr>
                     </c:when>
                     <c:otherwise>
-                     <c:forEach items="${dispatchInfos}" var="dis">
+                     <c:forEach items="${p.dataList}" var="dis">
                        <tr>
 	                        <td>${dis.id }</td>
 	                        <td>${dis.origin }</td>
@@ -91,9 +92,19 @@
                     </c:otherwise>
                     </c:choose>
                    </table>
+			<a href="${pageContext.request.contextPath}/owner/searchByPageController?page=1">首页</a>&nbsp;
+			<c:if test="${p.pageNo ne 1}">
+				<a href="${pageContext.request.contextPath }/owner/searchByPageController?page=${p.pageNo-1}">上一页</a>
+			</c:if>&nbsp;
+			当前页：${p.pageNo} |  ${p.pages} &nbsp;
+			<c:if test="${p.pageNo < p.pages}">
+				<a href="${pageContext.request.contextPath }/owner/searchByPageController?page=${p.pageNo+1}">下一页</a>
+			</c:if>&nbsp;
+			<a href="${pageContext.request.contextPath }/owner/searchByPageController?page=${p.pages}">尾页</a>
     		
     	</c:otherwise>
     </c:choose>
+
 	  </div>
   </div>
   </body>
