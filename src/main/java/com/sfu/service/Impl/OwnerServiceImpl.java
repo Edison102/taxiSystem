@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service("ownerService")
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class OwnerServiceImpl implements IOwnerService {
 
 	@Autowired
@@ -66,7 +67,6 @@ public class OwnerServiceImpl implements IOwnerService {
 	}
 
 	@Override
-	@Transactional(isolation = Isolation.READ_COMMITTED)
 	public void judgeIsPassByUid(Integer uid, int is_pass) {
 		if(is_pass==0){
 			dao.modifyIsPassByUid(uid,is_pass);
@@ -82,7 +82,6 @@ public class OwnerServiceImpl implements IOwnerService {
 	}
 
 	@Override
-	@Transactional(isolation = Isolation.READ_COMMITTED)
 	public void cancelOwnerByUid(Integer uid) {
 		dao.modifyIsPassByUid(uid,0);
 		evaluationDao.removeEvaluationByUid(uid);

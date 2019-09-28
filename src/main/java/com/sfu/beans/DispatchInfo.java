@@ -1,10 +1,12 @@
 package com.sfu.beans;
 
+import java.io.Serializable;
+
 /**
  * @author Edison
  *
  */
-public class DispatchInfo {
+public class DispatchInfo implements Serializable {
 	private Integer id;
 	private Integer uid; //车主信息
 	private String origin;

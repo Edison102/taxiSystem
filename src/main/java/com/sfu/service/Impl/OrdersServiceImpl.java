@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("ordersService")
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class OrdersServiceImpl implements IOrdersService {
 
 	@Autowired

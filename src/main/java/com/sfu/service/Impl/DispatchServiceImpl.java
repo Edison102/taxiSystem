@@ -9,11 +9,14 @@ import com.sfu.dao.OrdersDao;
 import com.sfu.service.IDispatchInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("dispatchInfoService")
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class DispatchServiceImpl implements IDispatchInfoService{
 
 	@Autowired
@@ -47,6 +50,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
+	@Cacheable(value = "redisCacheManager",key="'redis_dispatchInfo_'+#id")
 	public DispatchInfo selectDispatchInfoById(Integer id) {
 		return dao.quaryDispatchInfoById(id);
 	}
@@ -67,6 +71,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
+	@Cacheable(value = "redisCacheManager")
 	public List<DispatchInfo> selectDispatchInfoByPage(Integer uid, int start, int count) {
 		return dao.quaryDispatchInfoByPageAndUid(uid,start,count);
 	}
@@ -77,6 +82,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
+	@CachePut(value = "redisCacheManager",key="'redis_dispatchInfo_'+#id")
 	public void updateDispatchInfo(Integer id) {
 		dao.modifyDispatchInfoById(id);
 	}
@@ -88,7 +94,6 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	@Transactional(isolation = Isolation.READ_COMMITTED)
 	public void finishAllDispatchInfo(Integer id,double payment) {
 		dao.finishDispatchInfoById(id);
 		List<Orders> orders=ordersDao.quaryOrdersByDis(id);
