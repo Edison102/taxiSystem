@@ -109,7 +109,6 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public boolean aboard(Integer id, Integer uid) {
 		DispatchInfo dispatchInfo=dao.quaryDispatchInfoById(id);
 		if(dispatchInfo.getNum_peo()>=dispatchInfo.getMax_peo()||dispatchInfo.getIs_over()==1){

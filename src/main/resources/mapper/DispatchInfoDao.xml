@@ -19,7 +19,7 @@
   	
   	
   	<select id="quaryDispatchInfoById" resultType="DispatchInfo">
-  		select * from dispatch_info where id=#{id}
+  		select * from dispatch_info where id=#{id} for update
   	</select>
 
 
