@@ -104,12 +104,12 @@ public class DispatchInfoController {
 	@RequestMapping("aboardController")
 	private String aboardController(HttpSession session,int id){
 		User user=(User) session.getAttribute("user");
-		DispatchInfo dispatchInfo=dispatchService.selectDispatchInfoById(id);
+		/*DispatchInfo dispatchInfo=dispatchService.selectDispatchInfoById(id);
 		if(dispatchInfo.getNum_peo()>=dispatchInfo.getMax_peo()||dispatchInfo.getIs_over()==1){
 			return "aboardError";
-		}
+		}*/
 		boolean success=dispatchService.aboard(id,user.getUid());
-		if(!success) return "aboardError";
-		return "redirect:/orders/searchAllController";
+		if(!success) return "error/aboardError";
+		return "redirect:/orders/searchByPageController";
 	}
 }

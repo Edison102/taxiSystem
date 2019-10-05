@@ -50,7 +50,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	@Cacheable(value = "redisCacheManager",key="'redis_dispatchInfo_'+#id")
+	//@Cacheable(value = "redisCacheManager",key="'redis_dispatchInfo_'+#id")
 	public DispatchInfo selectDispatchInfoById(Integer id) {
 		return dao.quaryDispatchInfoById(id);
 	}
@@ -82,7 +82,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	@CachePut(value = "redisCacheManager",key="'redis_dispatchInfo_'+#id")
+	//@CachePut(value = "redisCacheManager",key="'redis_dispatchInfo_'+#id")
 	public void updateDispatchInfo(Integer id) {
 		dao.modifyDispatchInfoById(id);
 	}
