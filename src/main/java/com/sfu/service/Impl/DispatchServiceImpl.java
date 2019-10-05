@@ -61,6 +61,7 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
+    @Cacheable(value = "redisCacheManager")
 	public List<DispatchInfo> selectDispatchInfoByPage(int start, int count) {
 		return dao.quaryDispatchInfoByPage(start,count);
 	}
@@ -71,7 +72,6 @@ public class DispatchServiceImpl implements IDispatchInfoService{
 	}
 
 	@Override
-	@Cacheable(value = "redisCacheManager")
 	public List<DispatchInfo> selectDispatchInfoByPage(Integer uid, int start, int count) {
 		return dao.quaryDispatchInfoByPageAndUid(uid,start,count);
 	}
